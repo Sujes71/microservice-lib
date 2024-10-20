@@ -1,4 +1,4 @@
 /**
  * Test parent package.
  */
-package es.zed;
+package es.zed.security;

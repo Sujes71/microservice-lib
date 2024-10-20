@@ -39,63 +39,6 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Spring Security for handling authentication and authorization -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-
-    <!-- JJWT (Java JWT) API for generating and parsing JWT tokens -->
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-api</artifactId>
-      <version>0.11.5</version>
-    </dependency>
-
-    <!-- JJWT Implementation for JWT signing algorithms (HS256, etc.) -->
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-impl</artifactId>
-      <version>0.11.5</version>
-    </dependency>
-
-    <!-- JJWT Jackson for integrating JWT with Jackson for JSON processing -->
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-jackson</artifactId>
-      <version>0.11.5</version>
-    </dependency>
-
-    <!-- Jakarta Servlet API for Spring Boot 3.x -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Spring Boot Test (including JUnit 5 support) -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- JUnit 5 API for writing tests -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.10.0</version> <!-- Asegúrate de usar la última versión -->
-      <scope>test</scope>
-    </dependency>
-
-    <!-- JUnit 5 Engine for running tests -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.10.0</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>

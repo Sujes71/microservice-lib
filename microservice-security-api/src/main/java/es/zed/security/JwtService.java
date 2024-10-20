@@ -1,4 +1,4 @@
-package es.zed.common;
+package es.zed.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

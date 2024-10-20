@@ -23,6 +23,7 @@
     <module>microservice-event</module>
     <module>microservice-amqp-config</module>
     <module>microservice-pokeapi-db</module>
+    <module>microservice-security-api</module>
   </modules>
   <scm>
 		<connection/>

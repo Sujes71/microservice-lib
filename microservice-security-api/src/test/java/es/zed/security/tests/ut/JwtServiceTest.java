@@ -1,8 +1,9 @@
-package es.zed.ut;
+package es.zed.security.tests.ut;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import es.zed.common.JwtService;
+import es.zed.security.Application;
+import es.zed.security.JwtService;
 import io.jsonwebtoken.Claims;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = es.zed.Application.class)
+@SpringBootTest(classes = Application.class)
 class JwtServiceTest {
 
   @Autowired

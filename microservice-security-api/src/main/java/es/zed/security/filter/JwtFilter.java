@@ -1,7 +1,7 @@
-package es.zed.common.filter;
+package es.zed.security.filter;
 
-import es.zed.common.JwtService;
 import es.zed.common.exception.enums.GenericTypeException;
+import es.zed.security.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
