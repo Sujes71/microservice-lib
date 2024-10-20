@@ -1,17 +1,16 @@
 package es.zed.common.config;
 
 import es.zed.common.utils.CustomObjectMapper;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import javax.crypto.SecretKey;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * Application config.
  */
 @Configuration
+@PropertySource("classpath:common-config.properties")
 public class ApplicationConfig {
 
   /**
@@ -32,10 +31,5 @@ public class ApplicationConfig {
   @Bean
   public RestTemplate restTemplate() {
     return new RestTemplate();
-  }
-
-  @Bean
-  public SecretKey secretKey() {
-    return Keys.secretKeyFor(SignatureAlgorithm.HS256);
   }
 }
