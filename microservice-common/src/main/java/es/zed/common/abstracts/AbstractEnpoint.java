@@ -1,7 +1,7 @@
-package es.zed.common.service.abstracts;
+package es.zed.common.abstracts;
 
-import es.zed.common.service.exception.GenericException;
-import es.zed.common.service.exception.enums.GenericTypeException;
+import es.zed.common.exception.GenericException;
+import es.zed.common.exception.enums.GenericTypeException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.function.Supplier;

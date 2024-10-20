@@ -1,4 +1,4 @@
-package es.zed.common.service.utils;
+package es.zed.common.utils;
 
 import java.io.Serializable;
 

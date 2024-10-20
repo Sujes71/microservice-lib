@@ -1,6 +1,6 @@
 package es.zed.event.spring;
 
-import es.zed.common.service.utils.CustomObjectMapper;
+import es.zed.common.utils.CustomObjectMapper;
 import es.zed.event.common.spring.EventParserManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;

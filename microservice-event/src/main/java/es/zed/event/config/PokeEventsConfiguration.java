@@ -1,6 +1,6 @@
 package es.zed.event.config;
 
-import es.zed.common.service.utils.CustomObjectMapper;
+import es.zed.common.utils.CustomObjectMapper;
 import es.zed.event.parser.PokeEventParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

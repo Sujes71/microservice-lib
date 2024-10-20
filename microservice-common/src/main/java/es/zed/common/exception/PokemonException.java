@@ -1,4 +1,4 @@
-package es.zed.common.service.exception;
+package es.zed.common.exception;
 
 import org.springframework.http.HttpStatus;
 

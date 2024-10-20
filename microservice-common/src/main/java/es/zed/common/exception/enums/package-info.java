@@ -1,4 +1,4 @@
 /**
  * The enums exceptions container for common.
  */
-package es.zed.common.service.exception.enums;
+package es.zed.common.exception.enums;

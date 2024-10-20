@@ -1,6 +1,6 @@
 package es.zed.config;
 
-import es.zed.common.service.utils.CustomObjectMapper;
+import es.zed.common.utils.CustomObjectMapper;
 import es.zed.controller.AbstractAmqpController;
 import es.zed.event.common.spring.EventParserManager;
 import es.zed.repository.EventIdRepository;

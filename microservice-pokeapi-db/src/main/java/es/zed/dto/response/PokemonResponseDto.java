@@ -1,6 +1,6 @@
 package es.zed.dto.response;
 
-import es.zed.common.service.utils.Dto;
+import es.zed.common.utils.Dto;
 import es.zed.dto.PokemonDto;
 import java.util.List;
 import lombok.AllArgsConstructor;

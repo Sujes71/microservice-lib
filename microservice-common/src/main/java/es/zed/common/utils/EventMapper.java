@@ -1,4 +1,4 @@
-package es.zed.common.service.utils;
+package es.zed.common.utils;
 
 /**
  * Event mapper interface.

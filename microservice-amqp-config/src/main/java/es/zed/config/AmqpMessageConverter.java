@@ -3,7 +3,7 @@ package es.zed.config;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-import es.zed.common.service.utils.CustomObjectMapper;
+import es.zed.common.utils.CustomObjectMapper;
 import es.zed.event.common.AbstractEvent;
 import es.zed.event.common.spring.EventParserManager;
 import java.io.IOException;

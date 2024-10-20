@@ -1,4 +1,4 @@
-package es.zed.common.service.exception.enums;
+package es.zed.common.exception.enums;
 
 /**
  * Exception codes for known common error conditions.

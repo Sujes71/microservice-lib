@@ -1,4 +1,4 @@
 /**
  * The exception container for common.
  */
-package es.zed.common.service.exception;
+package es.zed.common.exception;

@@ -1,6 +1,6 @@
-package es.zed.common.service.exception;
+package es.zed.common.exception;
 
-import es.zed.common.service.exception.enums.GenericTypeException;
+import es.zed.common.exception.enums.GenericTypeException;
 
 /**
  * Generic exception.

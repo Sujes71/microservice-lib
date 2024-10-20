@@ -1,6 +1,6 @@
 package es.zed.event.parser;
 
-import es.zed.common.service.utils.CustomObjectMapper;
+import es.zed.common.utils.CustomObjectMapper;
 import es.zed.event.common.AbstractEventParser;
 import es.zed.event.pokedb.abstracts.AbstractAbilityEvent;
 import org.springframework.stereotype.Component;
