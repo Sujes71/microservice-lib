@@ -12,16 +12,34 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Security config.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+  /**
+   * Jwt filter.
+   */
   private final JwtFilter jwtFilter;
 
+  /**
+   * Constructor.
+   *
+   * @param jwtFilter filter.
+   */
   public SecurityConfig(JwtFilter jwtFilter) {
     this.jwtFilter = jwtFilter;
   }
 
+  /**
+   * Filter chain.
+   *
+   * @param http http.
+   * @return chain.
+   * @throws Exception ex.
+   */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
@@ -37,6 +55,13 @@ public class SecurityConfig {
     return http.build();
   }
 
+  /**
+   * Authentication manager.
+   *
+   * @param authenticationConfiguration config.
+   * @return manager.
+   * @throws Exception ex.
+   */
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
     return authenticationConfiguration.getAuthenticationManager();

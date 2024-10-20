@@ -18,16 +18,36 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * Jwt filter.
+ */
 @Component
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
+  /**
+   * jwt service.
+   */
   private final JwtService jwtService;
 
+  /**
+   * Constructor.
+   *
+   * @param jwtService service.
+   */
   public JwtFilter(JwtService jwtService) {
     this.jwtService = jwtService;
   }
 
+  /**
+   * Do filter internal.
+   *
+   * @param request req.
+   * @param response response.
+   * @param chain chain.
+   * @throws ServletException ex.
+   * @throws IOException ex.
+   */
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
       throws ServletException, IOException {
@@ -45,7 +65,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
           SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-      } catch(ExpiredJwtException e) {
+      } catch (ExpiredJwtException e) {
         log.info(GenericTypeException.EXPIRED_TOKEN_EXCEPTION.getMessage());
       } catch (JwtException e) {
         log.info(GenericTypeException.INVALID_TOKEN_EXCEPTION.getMessage());
