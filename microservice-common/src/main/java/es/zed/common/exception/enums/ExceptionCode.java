@@ -8,26 +8,31 @@ public enum ExceptionCode {
   /**
    * Invalid uri exception.
    */
-  C500000001,
+  C500000,
 
   /**
    * Resource access exception.
    */
-  C500000002,
+  C500001,
 
   /**
    * Unexpected body response.
    */
-  C500000003,
+  C500002,
 
   /**
-   * Invalid authentication exception.
+   * Invalid call exception.
    */
-  C400000001,
+  C400000,
 
   /**
-   * Invalid credential exception.
+   * Invalid token exception.
    */
-  C401000001
+  C401000,
+
+  /**
+   * Expired credential exception.
+   */
+  C401001
 
 }

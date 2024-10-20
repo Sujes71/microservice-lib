@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = es.zed.Application.class)
-public class JwtServiceTest {
+class JwtServiceTest {
 
   @Autowired
   private JwtService jwtService;
 
   @Test
-  public void testGenerateToken() {
+  void testGenerateToken() {
     Map<String, Object> claims = new HashMap<>();
     claims.put("sub", "user123");
     claims.put("role", "admin");
