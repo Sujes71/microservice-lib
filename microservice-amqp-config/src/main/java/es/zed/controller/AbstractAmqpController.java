@@ -1,6 +1,6 @@
 package es.zed.controller;
 
-import es.zed.event.common.AbstractEvent;
+import es.zed.common.AbstractEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;

@@ -2,8 +2,8 @@ package es.zed.config;
 
 import com.mongodb.MongoWriteException;
 import com.rabbitmq.client.Channel;
+import es.zed.common.AbstractEvent;
 import es.zed.controller.AbstractAmqpController;
-import es.zed.event.common.AbstractEvent;
 import es.zed.repository.EventIdRepository;
 import es.zed.repository.model.EventId;
 import java.io.IOException;

@@ -1,9 +1,9 @@
 package es.zed.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import es.zed.common.utils.Dto;
 import es.zed.dto.AbilityParentDto;
 import es.zed.dto.FormDto;
+import es.zed.utils.Dto;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,9 +1,9 @@
 package es.zed.config;
 
-import es.zed.common.utils.CustomObjectMapper;
+import es.zed.common.spring.EventParserManager;
 import es.zed.controller.AbstractAmqpController;
-import es.zed.event.common.spring.EventParserManager;
 import es.zed.repository.EventIdRepository;
+import es.zed.utils.CustomObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
