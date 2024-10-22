@@ -1,14 +1,11 @@
 package es.zed.security;
 
-import es.zed.config.JwtBearerToken;
-import es.zed.config.UserSecurity;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import es.zed.exception.GenericException;
+import es.zed.exception.enums.GenericTypeException;
+import io.micrometer.common.util.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -45,35 +42,24 @@ public class AuthConverter implements ServerAuthenticationConverter {
     if (exchange.getRequest().getURI().getPath().equals("/api/login")) {
       return Mono.empty();
     }
-
-    return Mono.justOrEmpty(
-            exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION)
-        )
-        .filter(s -> s.startsWith("Bearer "))
-        .map(s -> s.substring(7))
-        .flatMap(token -> extractUserFromToken(token)
-            .map(us -> new JwtBearerToken(us.getUsername(), null, us.getAuthorities())));
+    return Mono.justOrEmpty(exchange.getRequest().getHeaders())
+        .filter(h -> h.containsKey(HttpHeaders.AUTHORIZATION))
+        .switchIfEmpty(Mono.error(new GenericException(GenericTypeException.INVALID_TOKEN_EXCEPTION)))
+        .map(this::getTokenFromRequest)
+        .map(jwtService::validateAuthentication);
   }
 
   /**
-   * Extract user from token.
+   * Token from request.
    *
-   * @param token token.
-   * @return user.
+   * @param httpHeaders headers.
+   * @return token.
    */
-  private Mono<UserSecurity> extractUserFromToken(String token) {
-    String username = this.jwtService.getUserName(token);
-    Collection<String> authorities = this.jwtService.getAuthoritiesAndRoles(token);
-
-    List<GrantedAuthority> allAuthorities = new ArrayList<>();
-    for (String authority : authorities) {
-      allAuthorities.add(new SimpleGrantedAuthority(authority));
+  private String getTokenFromRequest(HttpHeaders httpHeaders) {
+    String token = httpHeaders.getFirst(HttpHeaders.AUTHORIZATION);
+    if (token == null) {
+      return Strings.EMPTY;
     }
-
-    return Mono.just(UserSecurity.builder()
-        .username(username)
-        .password(null)
-        .authorities(allAuthorities).build());
+    return StringUtils.isEmpty(token) ? Strings.EMPTY : token.replace("Bearer ", "");
   }
-
 }
