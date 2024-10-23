@@ -14,7 +14,7 @@ import lombok.Data;
 public class PokemonResponseDto implements Dto {
 
   /**
-   * data.
+   * List of pokemons.
    */
-  private List<PokemonDto> data;
+  private List<PokemonDto> items;
 }

@@ -20,6 +20,7 @@ public class CustomObjectMapper extends ObjectMapper {
     this.registerModule(new Jdk8Module());
     this.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     this.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
+    this.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
 
   /**

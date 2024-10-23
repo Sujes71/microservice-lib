@@ -2,11 +2,15 @@ package es.zed.abstracts;
 
 import es.zed.exception.GenericException;
 import es.zed.exception.enums.GenericTypeException;
+import es.zed.respmodel.ReqRespModel;
+import es.zed.utils.CustomObjectMapper;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -25,6 +29,11 @@ public abstract class AbstractEnpoint {
    * Rest template.
    */
   private final RestTemplate restTemplate;
+
+  /**
+   * Mapper.
+   */
+  private final CustomObjectMapper mapper;
 
   /**
    * Create a URI object from the given Minstait relative endpoint path.
@@ -69,6 +78,18 @@ public abstract class AbstractEnpoint {
   }
 
   /**
+   * Extract the response data from the given {@link ResponseEntity}.
+   *
+   * @param responseEntity {@link ResponseEntity}.
+   * @param responseClass response class.
+   * @param <T> Response type.
+   * @return response data.
+   */
+  protected <T> T extractResponseInternalData(final ResponseEntity<ReqRespModel<T>> responseEntity, final Class<T> responseClass) {
+    return mapper.convertValue(Objects.requireNonNull(responseEntity.getBody()).getData(), responseClass);
+  }
+
+  /**
    * Add default headers.
    *
    * @param auth auth.
@@ -101,4 +122,31 @@ public abstract class AbstractEnpoint {
         }
     );
   }
+
+  /**
+   * Do call internal.
+   *
+   * @param <T> T.
+   * @param url url.
+   * @param httpMethod http.
+   * @param httpHeaders headers.
+   * @param body body.
+   * @param responseClass response.
+   * @return T.
+   */
+  protected <T> T doCallInternal(final String url, final HttpMethod httpMethod,
+      final HttpHeaders httpHeaders, final Object body, final Class<T> responseClass) {
+    return handleConnectionException(
+        () -> {
+          log.info("Do call {}, method {}", url, httpMethod);
+
+          RequestEntity<Object> requestEntity = new RequestEntity<>(body, httpHeaders, httpMethod, createUri(url));
+          ParameterizedTypeReference<ReqRespModel<T>> typeRef = new ParameterizedTypeReference<>() {};
+
+          return extractResponseInternalData(restTemplate.exchange(requestEntity, typeRef), responseClass);
+        }
+    );
+  }
+
+
 }

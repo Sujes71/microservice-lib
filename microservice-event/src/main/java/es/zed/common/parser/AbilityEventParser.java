@@ -1,4 +1,4 @@
-package es.zed.parser;
+package es.zed.common.parser;
 
 import es.zed.pokedb.abstracts.AbstractAbilityEvent;
 import es.zed.utils.CustomObjectMapper;
