@@ -1,6 +1,7 @@
 package es.zed.config;
 
 import es.zed.security.AuthConverter;
+import es.zed.security.AuthManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

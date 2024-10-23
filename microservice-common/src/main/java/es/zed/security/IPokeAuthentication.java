@@ -1,4 +1,4 @@
-package es.zed.config;
+package es.zed.security;
 
 import org.springframework.security.core.Authentication;
 

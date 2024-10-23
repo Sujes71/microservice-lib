@@ -1,4 +1,4 @@
-package es.zed.config;
+package es.zed.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;

@@ -1,5 +1,6 @@
 package es.zed.abstracts;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import es.zed.exception.GenericException;
 import es.zed.exception.enums.GenericTypeException;
 import es.zed.respmodel.ReqRespModel;
@@ -81,12 +82,15 @@ public abstract class AbstractEnpoint {
    * Extract the response data from the given {@link ResponseEntity}.
    *
    * @param responseEntity {@link ResponseEntity}.
-   * @param responseClass response class.
+   * @param responseTypeReference response class.
    * @param <T> Response type.
    * @return response data.
    */
-  protected <T> T extractResponseInternalData(final ResponseEntity<ReqRespModel<T>> responseEntity, final Class<T> responseClass) {
-    return mapper.convertValue(Objects.requireNonNull(responseEntity.getBody()).getData(), responseClass);
+  protected <T> T extractResponseInternalData(final ResponseEntity<ReqRespModel<T>> responseEntity, final TypeReference<T> responseTypeReference) {
+    ReqRespModel<T> body = Objects.requireNonNull(responseEntity.getBody());
+    T data = body.getData();
+
+    return mapper.convertValue(data, responseTypeReference);
   }
 
   /**
@@ -133,11 +137,11 @@ public abstract class AbstractEnpoint {
    * @param httpMethod http.
    * @param httpHeaders headers.
    * @param body body.
-   * @param responseClass response.
+   * @param typeReference type reference.
    * @return T.
    */
   protected <T> T doCallInternal(final String url, final HttpMethod httpMethod,
-      final HttpHeaders httpHeaders, final Object body, final Class<T> responseClass) {
+      final HttpHeaders httpHeaders, final Object body, final TypeReference<T> typeReference) {
     return handleConnectionException(() -> {
       log.info("Do call {}, method {}", url, httpMethod);
 
@@ -145,7 +149,7 @@ public abstract class AbstractEnpoint {
       ParameterizedTypeReference<ReqRespModel<T>> typeRef = new ParameterizedTypeReference<>() {};
 
       ResponseEntity<ReqRespModel<T>> responseEntity = restTemplate.exchange(requestEntity, typeRef);
-      return extractResponseInternalData(responseEntity, responseClass);
+      return extractResponseInternalData(responseEntity, typeReference);
     });
   }
 

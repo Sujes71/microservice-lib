@@ -1,6 +1,5 @@
 package es.zed.security;
 
-import es.zed.config.PokeAuthentication;
 import es.zed.exception.GenericException;
 import es.zed.exception.enums.GenericTypeException;
 import es.zed.utils.DateUtils;
@@ -22,17 +21,9 @@ import org.springframework.stereotype.Service;
  * Jwt service.
  */
 @Service
-@PropertySource("classpath:security-db.properties")
+@PropertySource("classpath:common.properties")
 public class JwtService {
-
-  /**
-   * Username claim property name in the JWT.
-   */
-  private static final String CLAIM_USERNAME = "username";
-  /**
-   * Access role claim property in the JWT.
-   */
-  private static final String CLAIM_ACCESS_ROLE = "access_role";
+  
   /**
    * List of permissions claim property in the JWT.
    */

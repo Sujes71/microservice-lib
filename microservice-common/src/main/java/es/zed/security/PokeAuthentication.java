@@ -1,6 +1,5 @@
-package es.zed.config;
+package es.zed.security;
 
-import es.zed.security.JwtBearerToken;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
