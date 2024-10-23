@@ -1,12 +1,9 @@
 package es.zed.security;
 
 import es.zed.config.PokeAuthentication;
-import es.zed.enums.AccessRoleEnum;
 import es.zed.exception.GenericException;
 import es.zed.exception.enums.GenericTypeException;
-import es.zed.utils.CommonsUtils;
 import es.zed.utils.DateUtils;
-import es.zed.utils.UuidUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -82,21 +79,15 @@ public class JwtService {
       throw new GenericException(GenericTypeException.INVALID_TOKEN_EXCEPTION);
     }
 
-    final String subject = token.getUserId();
+    final String subject = token.getSubject();
     final ZonedDateTime expiration = DateUtils.zonedDateTimeUtc().plus(expirationAmount, expirationAmountUnit);
     final Map<String, Object> claimsMap = new HashMap<>();
 
     claimsMap
-        .put(CLAIM_USERNAME,
-            token.getUserId() == null ? CommonsUtils.EMPTY_STRING : token.getUserId());
-    claimsMap
-        .put(CLAIM_ACCESS_ROLE,
-            token.getAccessRole() == null ? CommonsUtils.EMPTY_STRING : token.getAccessRole());
-    claimsMap
         .put(CLAIM_AUTHORITIES, token.getAuthorities());
 
     return Jwts.builder().setClaims(claimsMap)
-        .setId(token.getId() == null ? UuidUtils.newUuid() : token.getId())
+        .setId(token.getId())
         .setExpiration(Date.from(expiration.toInstant()))
         .setSubject(subject)
         .signWith(secretKey).compact();
@@ -133,15 +124,11 @@ public class JwtService {
         .parseClaimsJws(token)
         .getBody();
 
-    final String username = claims.get(CLAIM_USERNAME, String.class);
-    final String access_role = claims.get(CLAIM_ACCESS_ROLE, String.class);
     final List<String> authorities = claims.get(CLAIM_AUTHORITIES, List.class);
 
     return new JwtBearerToken(claims.getId(),
         DateUtils.zonedDateTimeUtc(claims.getExpiration().getTime()),
         claims.getSubject(),
-        username,
-        AccessRoleEnum.valueOf(access_role),
         authorities);
   }
 }

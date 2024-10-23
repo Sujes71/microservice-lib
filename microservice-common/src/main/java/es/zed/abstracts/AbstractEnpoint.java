@@ -97,9 +97,11 @@ public abstract class AbstractEnpoint {
    */
   protected HttpHeaders addDefaultHeaders(final String auth) {
     HttpHeaders httpHeaders = new HttpHeaders();
-    httpHeaders.add("Authorization", auth);
+    httpHeaders.add("Authorization", "Bearer " + auth);
+    httpHeaders.add("Content-Type", "application/json");
     return httpHeaders;
   }
+
 
   /**
    * Generic method for api calls.
@@ -136,17 +138,17 @@ public abstract class AbstractEnpoint {
    */
   protected <T> T doCallInternal(final String url, final HttpMethod httpMethod,
       final HttpHeaders httpHeaders, final Object body, final Class<T> responseClass) {
-    return handleConnectionException(
-        () -> {
-          log.info("Do call {}, method {}", url, httpMethod);
+    return handleConnectionException(() -> {
+      log.info("Do call {}, method {}", url, httpMethod);
 
-          RequestEntity<Object> requestEntity = new RequestEntity<>(body, httpHeaders, httpMethod, createUri(url));
-          ParameterizedTypeReference<ReqRespModel<T>> typeRef = new ParameterizedTypeReference<>() {};
+      RequestEntity<Object> requestEntity = new RequestEntity<>(body, httpHeaders, httpMethod, createUri(url));
+      ParameterizedTypeReference<ReqRespModel<T>> typeRef = new ParameterizedTypeReference<>() {};
 
-          return extractResponseInternalData(restTemplate.exchange(requestEntity, typeRef), responseClass);
-        }
-    );
+      ResponseEntity<ReqRespModel<T>> responseEntity = restTemplate.exchange(requestEntity, typeRef);
+      return extractResponseInternalData(responseEntity, responseClass);
+    });
   }
+
 
 
 }
