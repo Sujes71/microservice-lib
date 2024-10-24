@@ -20,6 +20,11 @@ public class EventParserManager {
    */
   private final List<EventParser> eventParsers;
 
+  /**
+   * Constructor.
+   *
+   * @param eventParsers event parsers.
+   */
   public EventParserManager(List<EventParser> eventParsers) {
     this.eventParsers = eventParsers;
   }

@@ -39,14 +39,23 @@ public class AmqpConfig {
   /**
    * Amqp properties.
    */
-  @Autowired
-  private AmqpProperties properties;
+  private final AmqpProperties properties;
 
   /**
    * Amqp admin.
    */
-  @Autowired
-  private AmqpAdmin amqpAdmin;
+  private final AmqpAdmin amqpAdmin;
+
+  /**
+   * Constructor.
+   *
+   * @param properties properties.
+   * @param amqpAdmin amqp admin.
+   */
+  public AmqpConfig(AmqpProperties properties, AmqpAdmin amqpAdmin) {
+    this.properties = properties;
+    this.amqpAdmin = amqpAdmin;
+  }
 
   /**
    * Events in queue bean.
