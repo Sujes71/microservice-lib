@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import es.zed.common.AbstractEvent;
 import es.zed.common.AbstractEventBody;
 import es.zed.pokeapi.PokeCreatedEvent;
+import es.zed.pokeapi.PokeUpdatedEvent;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -16,6 +17,7 @@ import lombok.ToString;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type_id")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = PokeCreatedEvent.class, name = PokeCreatedEvent.TYPE_ID),
+    @JsonSubTypes.Type(value = PokeUpdatedEvent.class, name = PokeUpdatedEvent.TYPE_ID),
 })
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

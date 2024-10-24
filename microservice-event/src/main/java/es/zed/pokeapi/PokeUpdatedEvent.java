@@ -1,21 +1,21 @@
-package es.zed.pokedb;
+package es.zed.pokeapi;
 
-import es.zed.pokedb.abstracts.AbstractAbilityEvent;
+import es.zed.pokeapi.abstracts.AbstractPokeEvent;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * Poke created event.
+ * Poke updated event.
  */
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class AbilityCreatedEvent extends AbstractAbilityEvent<AbilityCreatedEventBody> {
+public class PokeUpdatedEvent extends AbstractPokeEvent<PokeUpdatedEventBody> {
 
   /**
    * Unique platform event type identifier.
    */
-  public static final String TYPE_ID = "event.AbilityCreatedEvent";
+  public static final String TYPE_ID = "event.PokeUpdatedEvent";
   /**
    * Event version.
    */
@@ -24,7 +24,7 @@ public class AbilityCreatedEvent extends AbstractAbilityEvent<AbilityCreatedEven
   /**
    * Constructor.
    */
-  public AbilityCreatedEvent() {
+  public PokeUpdatedEvent() {
     super(TYPE_ID, VERSION);
   }
 
@@ -39,8 +39,8 @@ public class AbilityCreatedEvent extends AbstractAbilityEvent<AbilityCreatedEven
    * @param body body.
    */
   @Builder
-  public AbilityCreatedEvent(final String origin, final String typeId, final String messageId,
-      final Long creationTs, final String pokemonId, final AbilityCreatedEventBody body) {
+  public PokeUpdatedEvent(final String origin, final String typeId, final String messageId,
+      final Long creationTs, final String pokemonId, final PokeUpdatedEventBody body) {
     super(origin, CONTEXT, typeId, messageId, VERSION, creationTs, pokemonId, body);
   }
 }

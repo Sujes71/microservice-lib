@@ -5,7 +5,6 @@ import es.zed.common.EventParser;
 import java.util.Collections;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,8 +18,11 @@ public class EventParserManager {
   /**
    * The known event parsers.
    */
-  @Autowired(required = false)
-  private List<EventParser> eventParsers;
+  private final List<EventParser> eventParsers;
+
+  public EventParserManager(List<EventParser> eventParsers) {
+    this.eventParsers = eventParsers;
+  }
 
   /**
    * Get the parser that can be used to deserialize the given json.

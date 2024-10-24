@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
@@ -15,19 +14,29 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Slf4j
 @PropertySource("classpath:amqp-config.properties")
-public class AbstractAmqpController<T extends AbstractEvent> {
+public abstract class AbstractAmqpController<T extends AbstractEvent<?>> {
 
   /**
    * Rabbit template used to send the notification requests to the mail channel queue.
    */
-  @Autowired
-  private RabbitTemplate requestTemplate;
+  private final RabbitTemplate requestTemplate;
 
   /**
    * The name of the notifications response/result exchange.
    */
   @Value("${producer.exchange.name}")
   private String producerExchangeName;
+
+  /**
+   * Constructor.
+   *
+   * @param requestTemplate template.
+   * @param producerExchangeName producer name.
+   */
+  public AbstractAmqpController(final RabbitTemplate requestTemplate, final String producerExchangeName) {
+    this.requestTemplate = requestTemplate;
+    this.producerExchangeName = producerExchangeName;
+  }
 
 
   /**

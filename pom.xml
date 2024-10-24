@@ -25,6 +25,7 @@
     <module>microservice-pokeapi-db</module>
     <module>microservice-security-api</module>
     <module>microservice-security-db</module>
+    <module>microservice-kafka-config</module>
   </modules>
   <scm>
 		<connection/>

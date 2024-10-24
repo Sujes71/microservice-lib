@@ -1,4 +1,4 @@
-package es.zed.pokedb;
+package es.zed.pokeapi;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -10,14 +10,19 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Poke created event body.
+ * Poke updated event body.
  */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @JsonInclude(Include.NON_NULL)
-public class AbilityCreatedEventBody extends AbstractEventBody {
+public class PokeUpdatedEventBody extends AbstractEventBody {
+
+  /**
+   * id.
+   */
+  private String id;
 
   /**
    * name.
@@ -25,20 +30,15 @@ public class AbilityCreatedEventBody extends AbstractEventBody {
   private String name;
 
   /**
-   * url.
-   */
-  private String url;
-
-  /**
    * Poke created event body.
    *
+   * @param id id.
    * @param name name.
-   * @param url url.
    */
   @Builder
-  public AbilityCreatedEventBody(String name, String url) {
+  public PokeUpdatedEventBody(String id, String name) {
     super();
+    this.id = id;
     this.name = name;
-    this.url = url;
   }
 }
