@@ -6,6 +6,7 @@ import es.zed.common.AbstractEvent;
 import es.zed.controller.AbstractAmqpController;
 import es.zed.repository.EventIdRepository;
 import es.zed.repository.model.EventId;
+import es.zed.utils.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -85,7 +86,7 @@ public class AmqpControllerMessageListenerAdapter implements ChannelAwareMessage
       } catch (IllegalAccessException | InvocationTargetException e) {
         final Throwable cause = e.getCause();
         channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
-        eventIdRepository.deleteOne(new EventId(event.getMessageId(), event.getContext(), event.getTypeId()));
+        eventIdRepository.deleteOne(new EventId(event.getMessageId(), event.getContext(), event.getTypeId(), Constants.RABBIT_MANAGER));
         // Handle exception, do not rethrow
         log.error("Handling PokemonException consuming event {}, type {}: {}", event.getMessageId(), event.getTypeId(), cause.getMessage());
       }
@@ -179,7 +180,7 @@ public class AmqpControllerMessageListenerAdapter implements ChannelAwareMessage
    */
   private boolean checkAlreadyProcessed(final AbstractEvent<?> event) {
     try {
-      eventIdRepository.save(new EventId(event.getMessageId(), event.getContext(), event.getTypeId()));
+      eventIdRepository.save(new EventId(event.getMessageId(), event.getContext(), event.getTypeId(), Constants.RABBIT_MANAGER));
       return true;
     } catch (MongoWriteException e) {
       if (e.getMessage().contains("E11000")) {

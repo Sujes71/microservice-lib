@@ -84,6 +84,7 @@ public class EventIdRepository {
     Document document = new Document("_id", eventId.getId());
     document.append("_context", eventId.getContext());
     document.append("_eventType", eventId.getEventType());
+    document.append("_manager", eventId.getManager());
     mongoTemplate.getCollection(collectionName).insertOne(document);
     return eventId;
   }

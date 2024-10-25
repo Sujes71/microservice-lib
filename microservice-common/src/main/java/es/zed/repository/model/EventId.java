@@ -29,4 +29,9 @@ public class EventId {
    */
   private String eventType;
 
+  /**
+   * Manager.
+   */
+  private String manager;
+
 }
