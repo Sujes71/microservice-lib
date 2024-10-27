@@ -42,17 +42,15 @@ public abstract class AbstractPokeEvent<B extends AbstractEventBody> extends Abs
   /**
    * Abstract poke event.
    *
-   * @param origin origin.
    * @param context context.
    * @param typeId typeId.
    * @param messageId messageId.
    * @param version version.
    * @param creationTs creationTs.
-   * @param pokemonId pokemonId.
    * @param body body.
    */
-  public AbstractPokeEvent(String origin, String context, String typeId,
-      String messageId, String version, Long creationTs, String pokemonId,  B body) {
-    super(origin, context, typeId, messageId, version, creationTs, pokemonId, body);
+  public AbstractPokeEvent(String context, String typeId,
+      String messageId, String version, Long creationTs,  B body) {
+    super(context, typeId, messageId, version, creationTs, body);
   }
 }

@@ -31,16 +31,14 @@ public class PokeUpdatedEvent extends AbstractPokeEvent<PokeUpdatedEventBody> {
   /**
    * PokeCreatedEvent.
    *
-   * @param origin origin.
    * @param typeId typeId.
    * @param messageId messageId.
    * @param creationTs creationTs.
-   * @param pokemonId pokemonId.
    * @param body body.
    */
   @Builder
-  public PokeUpdatedEvent(final String origin, final String typeId, final String messageId,
-      final Long creationTs, final String pokemonId, final PokeUpdatedEventBody body) {
-    super(origin, CONTEXT, typeId, messageId, VERSION, creationTs, pokemonId, body);
+  public PokeUpdatedEvent(final String typeId, final String messageId,
+      final Long creationTs, final PokeUpdatedEventBody body) {
+    super(CONTEXT, typeId, messageId, VERSION, creationTs, body);
   }
 }

@@ -40,11 +40,7 @@ public class AmqpProperties {
    */
   @Value("${consumer.queue.name}")
   private String queueName;
-  /**
-   * If false do not requeue messages that are rejected (they must be sent to the dead-letter exchange).
-   */
-  @Value("${consumer.queue.defaultRequeueRejected}")
-  private Boolean defaultRequeueRejected;
+
   /**
    * Max number of concurrent consumers per queue.
    */

@@ -162,7 +162,6 @@ public class AmqpConfig {
     container.setQueueNames(properties.getQueueName());
     container.setMessageListener(amqpControllerMessageListenerAdapter);
     container.setErrorHandler(new SimpleErrorHandler());
-    container.setDefaultRequeueRejected(properties.getDefaultRequeueRejected());
     container.setMaxConcurrentConsumers(properties.getMaxConcurrentConsumers());
     container.setAcknowledgeMode(AcknowledgeMode.valueOf(properties.getListenerSimpleAcknowledgeMode()));
 

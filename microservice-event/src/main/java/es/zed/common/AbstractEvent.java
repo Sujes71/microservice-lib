@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.Instant;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import lombok.Data;
 
 /**
@@ -36,11 +34,6 @@ public abstract class AbstractEvent<B extends AbstractEventBody> implements Even
   @JsonProperty("type_id")
   private final String typeId;
   /**
-   * The service that sent the event.
-   */
-  @NotBlank
-  private String origin;
-  /**
    * Arbitrary application-specific identifier for the message/event.
    */
   @NotBlank
@@ -56,17 +49,6 @@ public abstract class AbstractEvent<B extends AbstractEventBody> implements Even
    */
   @JsonProperty("creation_ts")
   private Long creationTs;
-  /**
-   * Event creation timestamp (UTC), ISO_8601 UTC relative date.
-   */
-  @JsonProperty("creation_date")
-  private ZonedDateTime creationDate;
-
-  /**
-   * Pokemon id.
-   */
-  @JsonProperty("pokemonId")
-  private String pokemonId;
 
   /**
    * Event body.
@@ -87,28 +69,23 @@ public abstract class AbstractEvent<B extends AbstractEventBody> implements Even
   }
 
   /**
-   * State constructor, {@link #creationDate} is created from {@link #creationTs}.
+   * State constructor.
    *
-   * @param origin {@link #origin}
    * @param context {@link #context}
    * @param typeId {@link #typeId}
    * @param messageId {@link #messageId}
    * @param version {@link #version}
    * @param creationTs {@link #creationTs}
-   * @param pokemonId {@link #pokemonId}
    * @param body {@link #body}
    */
-  public AbstractEvent(final String origin, final String context, final String typeId,
-      final String messageId, final String version, final Long creationTs, final String pokemonId, final B body) {
-    this.origin = origin;
+  public AbstractEvent(final String context, final String typeId,
+      final String messageId, final String version, final Long creationTs, final B body) {
     this.context = context;
     this.typeId = typeId;
     this.messageId = messageId;
     this.version = version;
     this.creationTs = creationTs;
-    this.creationDate = creationTs == null ? null : ZonedDateTime.ofInstant(Instant.ofEpochMilli(creationTs), UTC);
     this.body = body;
-    this.pokemonId = pokemonId;
   }
 
 }
