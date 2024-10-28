@@ -4,6 +4,8 @@ import es.zed.security.AuthConverter;
 import es.zed.security.AuthManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
+import org.springframework.data.redis.core.ReactiveValueOperations;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -44,5 +46,17 @@ public class SecurityFluxConfig {
         .addFilterAt(jwtFilter, SecurityWebFiltersOrder.AUTHORIZATION);
 
     return http.build();
+  }
+
+  /**
+   * Reactive value operations.
+   *
+   * @param reactiveRedisTemplate template.
+   * @return template.
+   */
+  @Bean
+  public ReactiveValueOperations<String, String> reactiveValueOperations(
+      ReactiveRedisTemplate<String, String> reactiveRedisTemplate) {
+    return reactiveRedisTemplate.opsForValue();
   }
 }

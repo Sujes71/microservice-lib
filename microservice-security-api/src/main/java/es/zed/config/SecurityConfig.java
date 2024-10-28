@@ -5,6 +5,8 @@ import es.zed.security.AuthFilter;
 import es.zed.security.AuthManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,7 +37,7 @@ public class SecurityConfig {
    * Constructor.
    *
    * @param authConverter auth converter.
-   * @param authManager   auth manager.
+   * @param authManager auth manager.
    */
   public SecurityConfig(AuthConverter authConverter, AuthManager authManager) {
     this.authConverter = authConverter;
@@ -63,5 +65,16 @@ public class SecurityConfig {
         .addFilterBefore(new AuthFilter(authConverter, authManager), UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
+  }
+
+  /**
+   * Value operations.
+   *
+   * @param redisTemplate template.
+   * @return operations.
+   */
+  @Bean
+  public ValueOperations<String, String> valueOperations(RedisTemplate<String, String> redisTemplate) {
+    return redisTemplate.opsForValue();
   }
 }

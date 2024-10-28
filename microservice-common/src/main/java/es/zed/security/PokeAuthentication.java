@@ -26,7 +26,6 @@ public class PokeAuthentication extends AbstractAuthenticationToken implements I
   public PokeAuthentication(JwtBearerToken jwtBearerToken) {
     super(getAuthoritiesFromJwt(jwtBearerToken));
     this.jwtBearerToken = jwtBearerToken;
-    this.setAuthenticated(true);
     this.setDetails(jwtBearerToken);
   }
 
@@ -47,7 +46,7 @@ public class PokeAuthentication extends AbstractAuthenticationToken implements I
    */
   @Override
   public Object getCredentials() {
-    return null;
+    return jwtBearerToken.getId();
   }
 
   /**
