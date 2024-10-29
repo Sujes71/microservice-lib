@@ -48,13 +48,13 @@ public class AuthManager implements ReactiveAuthenticationManager {
                   auth.setAuthenticated(Boolean.TRUE);
                   return Mono.just(auth);
                 } else {
-                  log.warn("Invalid token for subject {}: {}", subject, tokenId);
-                  return Mono.empty();
+                  log.warn("Invalid token for subject {}", subject);
+                  return Mono.just(auth);
                 }
               })
               .switchIfEmpty(Mono.defer(() -> {
                 log.warn("No token found for subject: {}", subject);
-                return Mono.empty();
+                return Mono.just(auth);
               }));
         });
   }

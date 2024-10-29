@@ -44,12 +44,10 @@ public class AuthManager implements AuthenticationManager {
 
       if (storedToken != null && storedToken.equals(tokenId)) {
         authentication.setAuthenticated(Boolean.TRUE);
-        return authentication;
       } else {
-        throw new AuthenticationException("Invalid token") {};
+        log.warn("No token found for subject: {}", subject);
       }
-    } else {
-      throw new AuthenticationException("Invalid authentication type") {};
     }
+    return authentication;
   }
 }
